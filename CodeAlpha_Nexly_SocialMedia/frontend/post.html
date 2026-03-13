@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Post — Nexly</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/feed.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <style>
+      .comments-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        margin-top: 12px;
+      }
+      .comments-header {
+        font-family: var(--font-head);
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 18px;
+        color: var(--text);
+      }
+      .comment-form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--border);
+      }
+      .comment-form input {
+        flex: 1;
+      }
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 18px;
+        padding: 7px 14px;
+        border-radius: var(--radius-sm);
+        transition: all 0.2s;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: var(--font-body);
+      }
+      .back-btn:hover {
+        color: var(--text);
+        background: var(--surface);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button class="back-btn" onclick="history.back()">← Back</button>
+
+      <!-- Post -->
+      <div id="post-container"></div>
+
+      <!-- Comments -->
+      <div class="comments-section">
+        <div class="comments-header">💬 Comments</div>
+
+        <form id="comment-form" class="comment-form">
+          <input
+            type="text"
+            id="comment-input"
+            placeholder="Write a comment..."
+            required
+          />
+          <button type="submit" class="btn btn-primary btn-sm">Post</button>
+        </form>
+
+        <div id="comments-list">
+          <div class="spinner"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/post.js"></script>
+  </body>
+</html>

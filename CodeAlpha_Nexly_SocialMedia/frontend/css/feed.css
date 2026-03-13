@@ -1,0 +1,282 @@
+/* ── Feed Page ──────────────────────────────────────── */
+
+/* Compose box */
+.compose-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.compose-card:focus-within {
+  border-color: rgba(124, 109, 250, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(124, 109, 250, 0.1),
+    var(--glow);
+}
+.compose-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.compose-top textarea {
+  border: none;
+  resize: none;
+  font-size: 15px;
+  outline: none;
+  flex: 1;
+  min-height: 52px;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: transparent;
+  line-height: 1.6;
+}
+.compose-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+}
+.media-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+.media-btn:hover {
+  color: var(--primary2);
+  background: rgba(124, 109, 250, 0.1);
+}
+
+/* Image preview inside compose */
+.compose-preview {
+  position: relative;
+  margin-top: 10px;
+}
+.compose-preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.compose-preview-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.compose-preview-remove:hover {
+  background: rgba(250, 109, 142, 0.8);
+}
+
+/* Post card */
+.post-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition:
+    border-color 0.25s,
+    transform 0.25s,
+    box-shadow 0.25s;
+  margin-bottom: 12px;
+  animation: fadeUp 0.4s ease forwards;
+}
+.post-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    var(--glow);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 16px 18px 0;
+}
+.post-author {
+  flex: 1;
+}
+.post-author-name {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+}
+.post-author-name a:hover {
+  color: var(--primary2);
+}
+.post-time {
+  font-size: 11px;
+  color: var(--muted2);
+  margin-top: 1px;
+}
+
+.post-body {
+  padding: 12px 18px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.post-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-top: 1px solid var(--border);
+  transition: opacity 0.2s;
+}
+.post-image:hover {
+  opacity: 0.95;
+}
+
+.post-actions {
+  display: flex;
+  gap: 2px;
+  padding: 8px 12px 12px;
+}
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  font-family: var(--font-body);
+}
+.action-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+.action-btn.liked {
+  color: var(--accent);
+}
+.action-btn.liked:hover {
+  background: rgba(250, 109, 142, 0.1);
+}
+.action-btn .icon {
+  font-size: 17px;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+.action-btn:hover .icon {
+  transform: scale(1.2);
+}
+.action-btn.liked .icon {
+  animation: heartPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Post options menu */
+.post-menu-wrap {
+  position: relative;
+}
+.post-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 18px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  line-height: 1;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+.post-menu-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+.post-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  min-width: 130px;
+  box-shadow: var(--shadow);
+  z-index: 50;
+  overflow: hidden;
+  animation: fadeUp 0.15s ease;
+}
+.post-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: var(--font-body);
+  text-align: left;
+}
+.post-dropdown button:hover {
+  background: var(--border);
+}
+.post-dropdown button.danger {
+  color: var(--accent);
+}
+
+/* Stagger post cards */
+.post-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.post-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.post-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.post-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.post-card:nth-child(5) {
+  animation-delay: 0.25s;
+}

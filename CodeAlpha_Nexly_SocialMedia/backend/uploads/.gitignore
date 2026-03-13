@@ -1,0 +1,6 @@
+# Ignore all uploaded files but keep folder structure
+*
+!*/
+!.gitignore
+!avatars/.gitkeep
+!posts/.gitkeep

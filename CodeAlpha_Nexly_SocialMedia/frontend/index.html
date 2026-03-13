@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feed — Nexly</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/feed.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Compose box -->
+      <div class="compose-card">
+        <div class="compose-top">
+          <img id="compose-avatar" src="" class="avatar avatar-sm" alt="me" />
+          <textarea
+            id="compose-text"
+            placeholder="What's on your mind?"
+            rows="2"
+          ></textarea>
+        </div>
+        <div id="compose-preview-wrap"></div>
+        <div class="compose-actions">
+          <div style="display: flex; gap: 4px">
+            <label for="compose-image" class="media-btn" title="Add image"
+              >🖼</label
+            >
+            <input
+              type="file"
+              id="compose-image"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <button id="post-btn" class="btn btn-primary btn-sm">Post</button>
+        </div>
+      </div>
+
+      <!-- Feed -->
+      <div id="feed">
+        <!-- Skeleton loader -->
+        <div class="post-card" style="padding: 18px; margin-bottom: 12px">
+          <div
+            style="
+              display: flex;
+              gap: 11px;
+              align-items: center;
+              margin-bottom: 14px;
+            "
+          >
+            <div
+              class="skeleton"
+              style="width: 36px; height: 36px; border-radius: 50%"
+            ></div>
+            <div style="flex: 1">
+              <div
+                class="skeleton"
+                style="height: 12px; width: 120px; margin-bottom: 6px"
+              ></div>
+              <div class="skeleton" style="height: 10px; width: 70px"></div>
+            </div>
+          </div>
+          <div
+            class="skeleton"
+            style="height: 14px; width: 100%; margin-bottom: 8px"
+          ></div>
+          <div class="skeleton" style="height: 14px; width: 75%"></div>
+        </div>
+        <div
+          class="post-card"
+          style="padding: 18px; margin-bottom: 12px; opacity: 0.6"
+        >
+          <div
+            style="
+              display: flex;
+              gap: 11px;
+              align-items: center;
+              margin-bottom: 14px;
+            "
+          >
+            <div
+              class="skeleton"
+              style="width: 36px; height: 36px; border-radius: 50%"
+            ></div>
+            <div style="flex: 1">
+              <div
+                class="skeleton"
+                style="height: 12px; width: 100px; margin-bottom: 6px"
+              ></div>
+              <div class="skeleton" style="height: 10px; width: 60px"></div>
+            </div>
+          </div>
+          <div
+            class="skeleton"
+            style="height: 14px; width: 90%; margin-bottom: 8px"
+          ></div>
+          <div class="skeleton" style="height: 14px; width: 55%"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/feed.js"></script>
+  </body>
+</html>

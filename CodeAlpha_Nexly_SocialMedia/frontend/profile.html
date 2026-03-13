@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Profile — Nexly</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/feed.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="profile-banner"></div>
+
+      <div class="profile-card">
+        <div class="profile-avatar-wrap">
+          <img
+            id="profile-avatar"
+            src=""
+            class="avatar avatar-xl"
+            alt="avatar"
+          />
+        </div>
+        <div id="profile-actions" class="profile-actions"></div>
+
+        <div>
+          <div class="profile-name" id="profile-username">
+            <span
+              class="skeleton"
+              style="display: inline-block; width: 140px; height: 22px"
+            ></span>
+          </div>
+          <div class="profile-username" id="profile-handle"></div>
+          <div class="profile-bio" id="profile-bio"></div>
+        </div>
+
+        <div class="profile-stats">
+          <div class="profile-stat">
+            <div class="profile-stat-num" id="profile-posts-count">—</div>
+            <div class="profile-stat-label">Posts</div>
+          </div>
+          <div class="profile-stat">
+            <div class="profile-stat-num" id="profile-followers">—</div>
+            <div class="profile-stat-label">Followers</div>
+          </div>
+          <div class="profile-stat">
+            <div class="profile-stat-num" id="profile-following">—</div>
+            <div class="profile-stat-label">Following</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Posts -->
+      <div style="margin-top: 20px" id="profile-posts">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="edit-modal">
+      <div class="modal">
+        <button class="modal-close" id="modal-close">✕</button>
+        <h3>Edit Profile</h3>
+        <form id="edit-form">
+          <div class="form-group">
+            <label>Bio</label>
+            <textarea
+              id="edit-bio"
+              rows="3"
+              placeholder="Tell people about yourself..."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>Profile Photo</label>
+            <input type="file" id="edit-avatar" accept="image/*" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="js/profile.js"></script>
+  </body>
+</html>

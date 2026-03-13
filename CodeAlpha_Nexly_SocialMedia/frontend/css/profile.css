@@ -1,0 +1,276 @@
+/* ── Profile Page ───────────────────────────────────── */
+.profile-banner {
+  height: 180px;
+  background: linear-gradient(135deg, #1a1030 0%, #2d1060 50%, #1a0820 100%);
+  border-radius: var(--radius);
+  margin-bottom: -56px;
+  position: relative;
+  overflow: hidden;
+}
+.profile-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237c6dfa' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.profile-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 64px 28px 24px;
+  position: relative;
+  animation: fadeUp 0.4s ease;
+}
+.profile-avatar-wrap {
+  position: absolute;
+  top: -52px;
+  left: 28px;
+}
+.profile-avatar-wrap img {
+  border: 3px solid var(--surface);
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+.profile-avatar-wrap img:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 0 2px var(--primary),
+    0 12px 32px rgba(124, 109, 250, 0.3);
+}
+
+.profile-actions {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.profile-name {
+  font-family: var(--font-head);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.profile-username {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+}
+.profile-bio {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.profile-stats {
+  display: flex;
+  gap: 28px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.profile-stat {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.profile-stat:hover .profile-stat-num {
+  color: var(--primary2);
+}
+.profile-stat-num {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+}
+.profile-stat-label {
+  font-size: 11px;
+  color: var(--muted2);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 2px;
+  margin: 24px 0 20px;
+  border-bottom: 1px solid var(--border);
+}
+.profile-tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 10px 18px;
+  font-family: var(--font-body);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.2s;
+  letter-spacing: 0.01em;
+}
+.profile-tab.active,
+.profile-tab:hover {
+  color: var(--primary2);
+  border-bottom-color: var(--primary);
+}
+
+/* Comments thread */
+.comment-item {
+  display: flex;
+  gap: 11px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  animation: fadeUp 0.3s ease;
+}
+.comment-item:last-child {
+  border-bottom: none;
+}
+.comment-body {
+  flex: 1;
+}
+.comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+.comment-author {
+  font-weight: 700;
+  font-size: 13px;
+  font-family: var(--font-head);
+}
+.comment-author:hover {
+  color: var(--primary2);
+}
+.comment-time {
+  font-size: 11px;
+  color: var(--muted2);
+}
+.comment-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.comment-delete {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted2);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.comment-delete:hover {
+  color: var(--accent);
+  background: rgba(250, 109, 142, 0.1);
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open {
+  display: flex;
+  animation: modalBg 0.2s ease;
+}
+@keyframes modalBg {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 32px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  animation: modalIn 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.modal h3 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover {
+  color: var(--text);
+  border-color: var(--border2);
+}
+
+/* Clickable stat items */
+.stat-item {
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    color 0.15s;
+}
+.stat-item:hover .stat-value {
+  color: var(--primary);
+}
+.stat-item:hover {
+  transform: translateY(-2px);
+}
+
+.profile-stat {
+  cursor: pointer;
+  transition: transform 0.15s;
+  user-select: none;
+}
+.profile-stat:hover {
+  transform: translateY(-2px);
+}
+.profile-stat:hover .profile-stat-num {
+  color: var(--primary);
+}
