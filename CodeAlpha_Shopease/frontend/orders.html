@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shōp — My Orders</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar"></nav>
+
+    <div class="page-header">
+      <div class="container">
+        <h1>My Orders</h1>
+        <p>Your complete order history</p>
+      </div>
+    </div>
+
+    <div class="container" style="padding-top: 2.5rem; padding-bottom: 4rem">
+      <div id="orders-list">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- ── Scripts ────────────────────────────────────────── -->
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/utils.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        auth.require(true);
+        renderNavbar();
+        loadOrders();
+      });
+
+      async function loadOrders() {
+        const container = document.getElementById("orders-list");
+        try {
+          const { orders } = await api.get("/orders");
+
+          if (!orders.length) {
+            container.innerHTML = `
+          <div class="empty-state">
+            <span class="empty-icon">📦</span>
+            <h3>No orders yet</h3>
+            <p>Once you place an order it'll appear here.</p>
+            <a href="/index.html" class="btn btn-primary" style="margin-top:1rem">Start Shopping</a>
+          </div>`;
+            return;
+          }
+
+          container.innerHTML = orders
+            .map((order) => {
+              const date = new Date(order.created_at).toLocaleDateString(
+                "en-US",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                },
+              );
+              return `
+          <div class="order-card">
+            <div class="order-header">
+              <div>
+                <div class="order-id">Order #${order.id}</div>
+                <div class="order-date">${date}</div>
+              </div>
+              <div class="order-meta">
+                <span class="status-badge status-${order.status}">${order.status}</span>
+                <span class="order-total">₹${order.total.toFixed(2)}</span>
+              </div>
+            </div>
+            <div class="order-items">
+              ${order.items
+                .map(
+                  (item) => `
+                <div class="order-line">
+                  <div class="order-line-img">
+                    <img src="${item.image_url || ""}" alt="${item.name}" />
+                  </div>
+                  <div>
+                    <div class="order-line-name">${item.name}</div>
+                    <div class="order-line-meta">Qty: ${item.quantity} × $${item.unit_price.toFixed(2)}</div>
+                  </div>
+                  <span class="order-line-price">₹${(item.quantity * item.unit_price).toFixed(2)}</span>
+                </div>`,
+                )
+                .join("")}
+            </div>
+          </div>`;
+            })
+            .join("");
+        } catch (err) {
+          container.innerHTML = `<p class="error-text">${err.message}</p>`;
+        }
+      }
+    </script>
+  </body>
+</html>
