@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Board — Trellix</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="dashboard.html" class="navbar-brand">✦ Trellix</a>
+      <div class="navbar-user">
+        <div class="live-indicator" id="liveIndicator" style="display: none">
+          <div class="live-dot"></div>
+          Live
+        </div>
+        <div class="avatar" id="userAvatar">U</div>
+        <span id="userName"></span>
+        <button class="btn-logout" id="logoutBtn">Logout</button>
+      </div>
+    </nav>
+
+    <main class="main">
+      <div class="board-header">
+        <button class="back-btn" id="backBtn">← Back</button>
+        <div>
+          <h1 id="projectTitle" style="font-size: 20px; font-weight: 700"></h1>
+          <p
+            id="projectDesc"
+            style="font-size: 13px; color: var(--ink-faint); margin-top: 2px"
+          ></p>
+        </div>
+      </div>
+
+      <div class="kanban-board">
+        <!-- TO DO -->
+        <div class="kanban-col">
+          <div class="kanban-col-header">
+            <div class="kanban-col-title">
+              <div class="col-dot todo"></div>
+              To Do
+              <span class="col-count" id="count-todo">0</span>
+            </div>
+          </div>
+          <div id="col-todo"></div>
+          <button class="add-task-btn" id="addTodo">+ Add task</button>
+        </div>
+
+        <!-- IN PROGRESS -->
+        <div class="kanban-col">
+          <div class="kanban-col-header">
+            <div class="kanban-col-title">
+              <div class="col-dot inprogress"></div>
+              In Progress
+              <span class="col-count" id="count-inprogress">0</span>
+            </div>
+          </div>
+          <div id="col-inprogress"></div>
+          <button class="add-task-btn" id="addInprogress">+ Add task</button>
+        </div>
+
+        <!-- DONE -->
+        <div class="kanban-col">
+          <div class="kanban-col-header">
+            <div class="kanban-col-title">
+              <div class="col-dot done"></div>
+              Done
+              <span class="col-count" id="count-done">0</span>
+            </div>
+          </div>
+          <div id="col-done"></div>
+          <button class="add-task-btn" id="addDone">+ Add task</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add Task Modal -->
+    <div class="modal-overlay" id="addTaskModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Add Task</h2>
+          <button class="modal-close" id="closeAddTask">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="taskForm">
+            <div class="form-group">
+              <label for="taskTitle">Title *</label>
+              <input
+                type="text"
+                id="taskTitle"
+                placeholder="Task title"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="taskDesc">Description</label>
+              <textarea
+                id="taskDesc"
+                rows="3"
+                placeholder="Optional description"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="taskPriority">Priority</label>
+              <select id="taskPriority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="taskDue">Due Date</label>
+              <input type="date" id="taskDue" />
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                margin-top: 16px;
+              "
+            >
+              <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelAddTask"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary" style="width: auto">
+                Add Task
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task Detail Modal -->
+    <div class="modal-overlay" id="taskDetailModal">
+      <div class="modal" style="max-width: 600px">
+        <div class="modal-header">
+          <h2 id="detailTitle"></h2>
+          <button class="modal-close" id="closeDetail">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="task-detail-grid">
+            <div class="task-detail-main">
+              <h3>Description</h3>
+              <p id="detailDesc"></p>
+            </div>
+            <div class="task-detail-side">
+              <div class="detail-item">
+                <label>Priority</label>
+                <span id="detailPriority"></span>
+              </div>
+              <div class="detail-item">
+                <label>Status</label>
+                <span id="detailStatus"></span>
+              </div>
+              <div class="detail-item">
+                <label>Due Date</label>
+                <span id="detailDue"></span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-top: 16px">
+            <button class="btn btn-secondary btn-sm" id="moveTaskBtn">
+              → Move to Next
+            </button>
+            <button class="btn btn-danger btn-sm" id="deleteTaskBtn">
+              Delete
+            </button>
+          </div>
+
+          <div class="comments-section">
+            <h4>💬 Comments</h4>
+            <div id="commentsList"></div>
+            <div class="comment-input-row">
+              <input
+                type="text"
+                id="commentInput"
+                placeholder="Add a comment..."
+              />
+              <button
+                class="btn btn-primary"
+                style="width: auto"
+                id="addCommentBtn"
+              >
+                Post
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/socket.js"></script>
+    <script src="js/project.js"></script>
+  </body>
+</html>

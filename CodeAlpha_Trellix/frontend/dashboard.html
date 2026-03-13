@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Trellix</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="dashboard.html" class="navbar-brand">✦ Trellix</a>
+      <div class="navbar-user">
+        <div class="avatar" id="userAvatar">U</div>
+        <span id="userName"></span>
+        <button class="btn-logout" id="logoutBtn">Logout</button>
+      </div>
+    </nav>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>My Projects</h1>
+          <p>Manage and track all your projects</p>
+        </div>
+        <button
+          class="btn btn-primary"
+          style="width: auto"
+          id="createProjectBtn"
+        >
+          + New Project
+        </button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <div class="skeleton" style="height: 148px"></div>
+        <div class="skeleton" style="height: 148px"></div>
+        <div class="skeleton" style="height: 148px"></div>
+      </div>
+    </main>
+
+    <!-- Create / Edit Project Modal -->
+    <div class="modal-overlay" id="projectModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modalTitle">New Project</h2>
+          <button class="modal-close" id="closeModal" aria-label="Close">
+            ×
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="editProjectId" />
+          <form id="projectForm">
+            <div class="form-group">
+              <label for="projectTitle">Project Title *</label>
+              <input
+                type="text"
+                id="projectTitle"
+                placeholder="e.g. Website Redesign"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="projectDesc">Description</label>
+              <textarea
+                id="projectDesc"
+                rows="3"
+                placeholder="What is this project about?"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="projectColor">Accent Color</label>
+              <input type="color" id="projectColor" value="#d97706" />
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                margin-top: 16px;
+              "
+            >
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="
+                  document
+                    .getElementById('projectModal')
+                    .classList.remove('active')
+                "
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary" style="width: auto">
+                Save Project
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
